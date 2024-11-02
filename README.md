@@ -139,3 +139,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Suno AI](https://suno.ai) for music generation
 - [gcui-art/suno-api](https://github.com/gcui-art/suno-api) for Suno AI implementation
 - [DALL-E](https://openai.com/dall-e-3) for image generation
+  
+---
+[If You Like This Project Join My Discord Server](https://discord.gg/yjjC2J569K)
