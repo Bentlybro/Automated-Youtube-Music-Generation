@@ -1,4 +1,4 @@
-# Automated-Youtube-Music-Generation
+# Automated Youtube Music Generation
 
 An automated system that generates, combines, and uploads lofi jazz music videos to youtube using AI. The system uses Claude AI for prompts, Suno AI for music generation, DALL-E for background images, and automatically uploads the final compilation to YouTube.
 
