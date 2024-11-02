@@ -1,0 +1,7 @@
+anthropic
+aiohttp
+google-auth-oauthlib
+google-auth
+google-api-python-client
+moviepy
+pydub
