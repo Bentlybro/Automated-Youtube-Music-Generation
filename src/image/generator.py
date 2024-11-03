@@ -2,6 +2,7 @@ import os
 import random
 import requests
 from ..config import OPENAI_API_KEY
+import time
 
 def generate_background_image(prompts, photos_folder, max_retries=3):
     """

@@ -56,6 +56,10 @@ def generate_video_metadata(timestamps):
     
     description = description.replace("[TIMESTAMPS]", timestamp_text)
     
+    # Add GitHub link to the end of the description
+    github_link = "\n\n🔗 Check out the code behind this project: https://github.com/Bentlybro/Automated-Youtube-Music-Generation"
+    description += github_link
+    
     return title, description
 
 def upload_to_youtube(video_path, title, description):
