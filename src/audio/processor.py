@@ -2,9 +2,9 @@ import random
 from pydub import AudioSegment
 import os
 
-def concatenate_audio_files(all_songs, music_folder, fade_duration=2000):  # 2000ms = 2 seconds
+def concatenate_audio_files(all_songs, music_folder, fade_duration=2000, target_dbfs=-14):
     """
-    Combines multiple audio files into a single playlist with fade in/out effects
+    Combines multiple audio files into a single playlist with fade effects and volume normalization
     """
     combined_audio = AudioSegment.empty()
     current_position = 0
@@ -22,7 +22,16 @@ def concatenate_audio_files(all_songs, music_folder, fade_duration=2000):  # 200
                 print(f"Skipping {song['title']} - Duration too short ({duration_seconds:.1f} seconds)")
                 continue
             
-            # Apply fade in and fade out effects
+            # Normalize audio levels
+            current_dbfs = audio.dBFS
+            change_in_dbfs = target_dbfs - current_dbfs
+            
+            # Only adjust if the difference is significant (more than 2dB)
+            if abs(change_in_dbfs) > 2:
+                audio = audio.apply_gain(change_in_dbfs)
+                print(f"Normalized {song['title']} from {current_dbfs:.1f} dBFS to {audio.dBFS:.1f} dBFS")
+            
+            # Apply fade effects
             audio = audio.fade_in(fade_duration).fade_out(fade_duration)
             
             combined_audio += audio
@@ -41,6 +50,7 @@ def concatenate_audio_files(all_songs, music_folder, fade_duration=2000):  # 200
             
             current_position += len(audio)
             print(f"{i}. Added {song['title']} - Position: {timestamp} - Duration: {duration_seconds:.1f}s")
+            
         except Exception as e:
             print(f"Error loading file {song['file_path']}: {e}")
 
