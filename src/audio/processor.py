@@ -2,9 +2,9 @@ import random
 from pydub import AudioSegment
 import os
 
-def concatenate_audio_files(all_songs, music_folder):
+def concatenate_audio_files(all_songs, music_folder, fade_duration=2000):  # 2000ms = 2 seconds
     """
-    Combines multiple audio files into a single playlist
+    Combines multiple audio files into a single playlist with fade in/out effects
     """
     combined_audio = AudioSegment.empty()
     current_position = 0
@@ -21,6 +21,9 @@ def concatenate_audio_files(all_songs, music_folder):
             if duration_seconds < 60:
                 print(f"Skipping {song['title']} - Duration too short ({duration_seconds:.1f} seconds)")
                 continue
+            
+            # Apply fade in and fade out effects
+            audio = audio.fade_in(fade_duration).fade_out(fade_duration)
             
             combined_audio += audio
             
